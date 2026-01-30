@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sadece Dürüstçe</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #000;
+    color: #fff;
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* KALP ANİMASYONU */
+.heart {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 0, 70, 0.25);
+    transform: rotate(45deg);
+    animation: floatUp 8s linear infinite;
+}
+
+.heart::before,
+.heart::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 0, 70, 0.25);
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -6px;
+    left: 0;
+}
+.heart::after {
+    left: -6px;
+    top: 0;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 0;
+    }
+    10% { opacity: 1; }
+    100% {
+        transform: translateY(-120vh) rotate(45deg);
+        opacity: 0;
+    }
+}
+
+/* İÇERİK */
+.container {
+    text-align: center;
+    padding: 20px;
+    max-width: 420px;
+    width: 100%;
+    z-index: 2;
+}
+
+img {
+    width: 100%;
+    border-radius: 18px;
+    box-shadow: 0 0 30px rgba(255,255,255,0.15);
+}
+
+p {
+    margin: 22px 0;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.buttons {
+    margin-top: 24px;
+}
+
+button {
+    padding: 14px 22px;
+    margin: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+#accept {
+    background: #fff;
+    color: #000;
+}
+
+#escape {
+    background: #333;
+    color: #fff;
+    position: relative;
+}
+
+button:active {
+    transform: scale(0.96);
+}
+</style>
+</head>
+
+<body>
+
+<!-- ARKA PLAN KALPLER -->
+<script>
+for (let i = 0; i < 18; i++) {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDelay = Math.random() * 8 + "s";
+    heart.style.animationDuration = 6 + Math.random() * 6 + "s";
+    document.body.appendChild(heart);
+}
+</script>
+
+<audio id="music" autoplay loop>
+    <source src="muzik.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container" id="page1">
+    <img src="dilara.jpg" alt="">
+    <p>
+        Bunu yazmak kolay değil…<br>
+        ama dürüst olmak istedim.
+    </p>
+
+    <div class="buttons">
+        <button id="accept">Kabul ediyorum</button>
+        <button id="escape">Şu an hazır değilim</button>
+    </div>
+</div>
+
+<div class="container" id="page2" style="display:none;">
+    <img src="benim.jpg" alt="">
+    <p style="font-size:20px;">
+        Seni incitmek istemedim,<br>
+        seni seviyorum.
+    </p>
+</div>
+
+<script>
+const escapeBtn = document.getElementById("escape");
+escapeBtn.addEventListener("touchstart", moveBtn);
+escapeBtn.addEventListener("mouseover", moveBtn);
+
+function moveBtn() {
+    escapeBtn.style.left = Math.random()*160 - 80 + "px";
+    escapeBtn.style.top  = Math.random()*160 - 80 + "px";
+}
+
+document.getElementById("accept").onclick = () => {
+    document.getElementById("page1").style.display = "none";
+    document.getElementById("page2").style.display = "block";
+};
+
+// MÜZİK AYARLARI
+const music = document.getElementById("music");
+music.volume = 0.4;
+music.currentTime = 58;
+</script>
+
+</body>
+</html>
