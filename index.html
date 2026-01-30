@@ -129,10 +129,28 @@ for (let i = 0; i < 18; i++) {
 }
 </script>
 
-<audio id="music" autoplay loop>
+<audio id="music" loop>
     <source src="muzik.mp3" type="audio/mpeg">
 </audio>
+<script>
+const music = document.getElementById("music");
+music.volume = 0.4;
+music.currentTime = 58;
 
+let musicStarted = false;
+
+function startMusic() {
+    if (!musicStarted) {
+        music.play().catch(() => {});
+        musicStarted = true;
+    }
+}
+
+// herhangi bir dokunuş müziği başlatsın
+document.body.addEventListener("touchstart", startMusic, { once: true });
+document.body.addEventListener("click", startMusic, { once: true });
+</script>
+    
 <div class="container" id="page1">
     <img src="dilara.jpg" alt="">
     <p>
@@ -150,7 +168,7 @@ for (let i = 0; i < 18; i++) {
     <img src="benim.jpg" alt="">
     <p style="font-size:20px;">
         Seni incitmek istemedim,<br>
-        seni seviyorum.
+        seni seviyorum. Sarılalım? :)
     </p>
 </div>
 
@@ -177,3 +195,4 @@ music.currentTime = 58;
 
 </body>
 </html>
+
